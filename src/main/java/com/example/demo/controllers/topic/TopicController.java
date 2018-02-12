@@ -27,6 +27,7 @@ public class TopicController {
     }
 
 //    http://localhost:8080/topics
+    // post方法增加
 //    header:  Content-Type  application/json    body:
 /*{
     "id": "php",
@@ -35,8 +36,23 @@ public class TopicController {
 }
 用get postman验证
 */
-    @RequestMapping(value = "/topics",method = RequestMethod.PUT)
+    @RequestMapping(value = "/topics",method = RequestMethod.POST)
     public  void addTopic(@RequestBody Topic topic){
         topicService.addTopic(topic);
+    }
+
+    //    http://localhost:8080/topics/spring
+    // PUT方法更新
+//    header:  Content-Type  application/json    body:
+/*{
+    "id": "spring",
+    "name": "my Spring Framework",
+    "description": "Spring Framework Description"
+}
+用get postman验证
+*/
+    @RequestMapping(value = "/topics/{id}",method = RequestMethod.PUT)
+    public  void updateTopic(@RequestBody Topic topic,@PathVariable String id){
+        topicService.updateTopic(topic,id);
     }
 }
