@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public class TopicService {
-    List<Topic> topics = Arrays.asList(
+    private List<Topic> topics = Arrays.asList(
             new Topic("spring", "Spring Framework", "Spring Framework Description"),
             new Topic("java", "java Framework", "java Description"),
             new Topic("2js", "js Framework", "js  Description")
@@ -15,5 +15,9 @@ public class TopicService {
 
     public List<Topic> getAllTopics() {
         return topics;
+    }
+
+    public Topic getTopic(String id){
+        return topics.stream().filter(t->t.getId().equals(id)).findFirst().get();
     }
 }
