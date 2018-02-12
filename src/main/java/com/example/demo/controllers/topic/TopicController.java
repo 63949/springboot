@@ -55,4 +55,18 @@ public class TopicController {
     public  void updateTopic(@RequestBody Topic topic,@PathVariable String id){
         topicService.updateTopic(topic,id);
     }
+
+  /*
+  http://localhost:8080/topics/java
+  delete 方法删除
+  header:  Content-Type  application/json    body:
+  {
+        "id": "java",
+            "name": "java Framework",
+            "description": "java Description"
+    }*/
+    @RequestMapping(value = "/topics/{id}",method = RequestMethod.DELETE)
+    public  void deleteTopic(@PathVariable String id){
+        topicService.deleteTopic(id);
+    }
 }
