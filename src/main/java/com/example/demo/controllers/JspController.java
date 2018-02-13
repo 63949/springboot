@@ -89,4 +89,10 @@ public class JspController {
         return "index";
     }
 
+    @GetMapping("/deleteBook")
+    public String deleteBook(@RequestParam long id){
+        lmsService.delete(id);
+        return "redirect:/hello0";
+    }
+
 }

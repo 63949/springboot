@@ -48,6 +48,7 @@
                 <th>作者</th>
                 <th>购买日期</th>
                 <th>编辑</th>
+                <th>删除</th>
             </tr>
             </thead>
             <tbody>
@@ -59,6 +60,7 @@
                     <td>${book.author}</td>
                     <td class="mydd">${book.purchaseDate}</td>
                     <td><a href="/updateBook?id=${book.id}"><div class="glyphicon glyphicon-pencil"></div></a></td>
+                    <td><a href="/deleteBook?id=${book.id}"><div class="glyphicon glyphicon-trash"></div></a></td>
                 </tr>
 
             </c:forEach>
