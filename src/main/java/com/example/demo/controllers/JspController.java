@@ -54,7 +54,7 @@ public class JspController {
     // 检查到需要转换的类型自动转换
     @InitBinder()
     public void initBinder(WebDataBinder binder){
-      binder.registerCustomEditor(Date.class,"purchaseDate",new MyCustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"),false));
+      binder.registerCustomEditor(Date.class,"purchaseDate",new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"),false));
     }
 
     // 只需要传值就可以了。
@@ -69,9 +69,10 @@ public class JspController {
         request.setAttribute("allbooks",null);
         Collection<Book> ll = lmsService.findAllBooks();
         ll.size();
-        request.setAttribute("allbooks",lmsService.findAllBooks());
-        request.setAttribute("mode","BOOK_VIEW");
-        return "index";
+       /* request.setAttribute("allbooks",lmsService.findAllBooks());
+        request.setAttribute("mode","BOOK_VIEW");*/
+  //      return "ok";
+        return "redirect:/hello0"; // 不要去直接请求别人的jsp,使用跳转访问.否则没有调CustomDateEditor的getValue方法就飞了,是因为CustomDateEditor对象没有重新生成的问题
     }
 
 }

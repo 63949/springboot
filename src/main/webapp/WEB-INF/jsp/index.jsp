@@ -15,12 +15,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/jquery-dateFormat.min.js"></script>
     <script type="text/javascript">
-           $().ready(function () {
+          /* $().ready(function () {
                $(".mydd").each(function (index) {
                    // console.log(index+ ": " + $( this ).text());
                   $(".mydd")[index].innerHTML = $.format.date(Date.parse($( this ).text()), 'yyyy-MM-dd');
                });
-           });
+           });*/
     </script>
 
 </head>
@@ -81,7 +81,8 @@
                 </div>
                 <div class="form-group">
                     <label for="purchaseDate">购买日期:</label>
-                    <input type="date" class="form-control" id="purchaseDate" value="${b.purchaseDate}"  name="purchaseDate">
+                  <%--  <input type="date" class="form-control" id="purchaseDate" value="${b.purchaseDate}"  name="purchaseDate">--%>
+                    <input type="date" class="form-control" id="purchaseDate" value="2011-11-12"  name="purchaseDate">
                 </div>
                 <button type="submit" class="btn btn-default">提交</button>
             </form>

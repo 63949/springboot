@@ -1,8 +1,11 @@
 package com.example.demo.controllers;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
-import java.util.zip.DataFormatException;
+
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 @Entity(name = "lms_tbl")
 public class Book {
@@ -15,8 +18,9 @@ public class Book {
 
     private String author;
 
-    @Column(name = "purchase_date")
+    @Column(name = "purchase_date", nullable = false, length = 10)
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="yyyy-MM-dd",iso = DATE)
     private Date purchaseDate;
 
     public long getId() {
