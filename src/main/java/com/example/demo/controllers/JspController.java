@@ -1,12 +1,19 @@
 package com.example.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 
 @Controller
@@ -33,7 +40,38 @@ public class JspController {
   @GetMapping("/hello0")
     public String getIndex(HttpServletRequest request) {
       request.setAttribute("allbooks",lmsService.findAllBooks());
+      request.setAttribute("mode","BOOK_VIEW");
       return "index";
+    }
+
+    @GetMapping("/updateBook")
+    public String getIndex(HttpServletRequest request, @RequestParam long id) {
+        request.setAttribute("b",lmsService.findOne(id));
+        request.setAttribute("mode","BOOK_EDIT");
+        return "index";
+    }
+
+    // 检查到需要转换的类型自动转换
+    @InitBinder()
+    public void initBinder(WebDataBinder binder){
+      binder.registerCustomEditor(Date.class,"purchaseDate",new MyCustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"),false));
+    }
+
+    // 只需要传值就可以了。
+    @PostMapping("/save")
+    public String save(@ModelAttribute Book b, BindingResult bindingResult,HttpServletRequest request){
+      System.out.println(b.getPurchaseDate());
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        String pddd = f.format(b.getPurchaseDate());
+       // book.setPurchaseDate(Date.parse());
+        lmsService.save(b);
+        b = null;
+        request.setAttribute("allbooks",null);
+        Collection<Book> ll = lmsService.findAllBooks();
+        ll.size();
+        request.setAttribute("allbooks",lmsService.findAllBooks());
+        request.setAttribute("mode","BOOK_VIEW");
+        return "index";
     }
 
 }
