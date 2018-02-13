@@ -21,4 +21,7 @@ public class LmsService {
     }
 
 
+    public void delete(long id) {
+        lmsRespository.delete(id);
+    }
 }
