@@ -26,6 +26,7 @@ header:  Content-Type  application/json    body:
     "description": "aaaa"
 }
 6.http://localhost:8081/topics/string/courses get 查询有course把topic也查询出来了
+7.http://localhost:8081/topics/string/course/111 get 验证查询单个课程
         */
 
 //http://localhost:8080/courses
@@ -35,7 +36,7 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @RequestMapping("/topics/{courseid}/courses")
+    @RequestMapping(value = "/topics/{courseid}/courses",method = RequestMethod.GET)
 //    public String getAllCourses(){
     public List<Course> getAllCourses(@PathVariable String courseid){
 //        return "All Courses";
@@ -43,9 +44,9 @@ public class CourseController {
     }
 
 //    http://localhost:8080/course/spring
-    @RequestMapping("/topics/{topicid}/course/{courseid}")
-    public Course getCourse(@PathVariable String topicid,@PathVariable String courseid){
-        return courseService.getCourse(topicid,courseid);
+    @RequestMapping(value = "/topics/{topicid}/course/{courseid}" ,method = RequestMethod.GET)
+    public Course getCourse(@PathVariable String courseid){
+        return courseService.getCourse(courseid);
     }
 
 //    http://localhost:8080/courses
@@ -74,7 +75,7 @@ public class CourseController {
 }
 用get postman验证
 */
-    @RequestMapping(value = "/topics/{topicid}/courses/id",method = RequestMethod.PUT)
+    @RequestMapping(value = "/topics/{topicid}/courses/{id}",method = RequestMethod.PUT)
     public  void updateCourse(@RequestBody Course course,@PathVariable String topicid,@PathVariable String id){
         course.setTopic(new Topic(topicid,"",""));
         courseService.updateCourse(course,id);

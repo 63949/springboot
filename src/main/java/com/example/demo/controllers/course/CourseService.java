@@ -21,10 +21,10 @@ public class CourseService {
         return  courses;
     }
 
-    public Course getCourse(String topicid, String courseid){
+    public Course getCourse( String courseid){
 //        return courses.stream().filter(t->t.getId().equals(id)).findFirst().get();
 
-        return courseRepository.findOne(topicid);
+        return courseRepository.findOne(courseid);
     }
 
     public void addCourse(Course course) {
