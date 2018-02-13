@@ -33,7 +33,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">所有书</a></li>
-            <li><a href="#">新书</a></li>
+            <li><a href="newBook">新书</a></li>
         </ul>
     </div>
 </nav>
@@ -68,7 +68,7 @@
     </c:choose>
 
     <c:choose>
-        <c:when test="${mode=='BOOK_EDIT'}">
+        <c:when test="${mode=='BOOK_EDIT' || mode=='BOOK_NEW'}">
             <form action="/save" method="post">
                 <input type="hidden" value="${b.id}" name="id" id="id">
                 <div class="form-group">

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,7 +61,7 @@ public class JspController {
 
     // 只需要传值就可以了。
     @PostMapping("/save")
-    public String save(@ModelAttribute Book b, BindingResult bindingResult,HttpServletRequest request){
+    public String save(@ModelAttribute Book b, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response){
       System.out.println(b.getPurchaseDate());
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
         String pddd = f.format(b.getPurchaseDate());
@@ -72,7 +74,19 @@ public class JspController {
        /* request.setAttribute("allbooks",lmsService.findAllBooks());
         request.setAttribute("mode","BOOK_VIEW");*/
   //      return "ok";
-        return "redirect:/hello0"; // 不要去直接请求别人的jsp,使用跳转访问.否则没有调CustomDateEditor的getValue方法就飞了,是因为CustomDateEditor对象没有重新生成的问题
+//        return "redirect:/hello0"; // 不要去直接请求别人的jsp,使用跳转访问.否则没有调CustomDateEditor的getValue方法就飞了,是因为CustomDateEditor对象没有重新生成的问题
+     /*   try {
+            response.sendRedirect("/hello0");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        return "redirect:/hello0";
+    }
+
+    @GetMapping("/newBook")
+    public String newBook(HttpServletRequest request){
+        request.setAttribute("mode","BOOK_NEW");
+        return "index";
     }
 
 }
