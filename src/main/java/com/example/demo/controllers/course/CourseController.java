@@ -7,6 +7,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*
+1. http://localhost:8081/topics get 查询为空
+2. http://localhost:8081/topics 添加topic
+header:  Content-Type  application/json    body:
+        {
+        "id": "string",
+        "name": "string",
+        "description": "string"
+        }
+3. http://localhost:8081/topics get 查询有id为string的topic
+4. http://localhost:8081/topics/string/courses get 查询为空
+5. http://localhost:8081/topics/string/courses 添加course
+header:  Content-Type  application/json    body:
+{
+    "id": "111",
+    "name": "aaaa",
+    "description": "aaaa"
+}
+6.http://localhost:8081/topics/string/courses get 查询有course把topic也查询出来了
+        */
+
 //http://localhost:8080/courses
 @RestController
 public class CourseController {
@@ -37,7 +58,7 @@ public class CourseController {
 }
 用get postman验证
 */
-    @RequestMapping(value = "/topics/{topicid}/courses/",method = RequestMethod.POST)
+    @RequestMapping(value = "/topics/{topicid}/courses",method = RequestMethod.POST)
     public  void addCourse(@RequestBody Course course,@PathVariable String topicid){
         course.setTopic(new Topic(topicid,"",""));
         courseService.addCourse(course);
