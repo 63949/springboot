@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 @Controller
@@ -21,14 +22,18 @@ public class JspController {
     }
 
 
-    @GetMapping("/hello0")
+  /*  @GetMapping("/hello0")
     public ModelAndView getIndex(Model model) {
 //        model.addAttribute("msg", "Hello there, This message has been injected from the controller method");
         ModelAndView m = new ModelAndView("index");
 //        lmsService.findAllBooks();
         m.addObject("allbooks",lmsService.findAllBooks() );
         return m;
+    }*/
+  @GetMapping("/hello0")
+    public String getIndex(HttpServletRequest request) {
+      request.setAttribute("allbooks",lmsService.findAllBooks());
+      return "index";
     }
-
 
 }
